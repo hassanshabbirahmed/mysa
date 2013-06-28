@@ -4,7 +4,11 @@
 #   Script written by Bruce Dargus for Xchanging Malaysia Sdn. Bhd.   #
 #                                                                     #
 #######################################################################
-#pacemaker_clusterip_centos6.4.sh
+
+# Project Title: pacemaker_clusterip_centos6.4.sh
+# Requirements: CentOS 6.4 (tested on x64 minimal install), network configuration, internet access
+# Purpose: This script is intended create a cluster from two CentOS 6.4 machines and create the resources necessary for a shared cluster IP (ocf:heartbeat:IPaddr2), high-availability webserving (ocf:heartbeat:apache), and drbd file replication (ocf:linbit:drbd).
+
 clear
 _Usage='usage: script <cluster name> <node1 hostname> <node1 ip> <node2 hostname> <node2 ip> <Cluster IP (optional)> <Cluster IP Netmask Prefix without slash  (optional)>'
 echo "Pacemaker installation on CentOS 6.4 x64"
@@ -19,12 +23,18 @@ echo
 [ -z "$4" ] && echo $_Usage && echo && exit
 [ -z "$5" ] && echo $_Usage && echo && exit
 
+#Define variables
+echo "We will now gather required information by asking you a series of questions."
+echo ""
+
+
+
 echo "Cluster will be created: $1"
 echo "Node 1 hostname has been set to: $2"
 echo "Node 1 ip address has been set to: $3"
 echo "Node 2 hostname has been set to: $4"
 echo "Node 2 ip address has been set to: $5"
-[ -z "$6" ] || [ -z "$7" ] || echo "ClusterIP will be created: $6 /$7"
+[ -z "$6" ] || [ -z "$7" ] || echo "ClusterIP resource will be created: $6 /$7"
 echo "Proceed with installation?"
 select yn in "Yes" "No"; do
     case $yn in
@@ -39,7 +49,7 @@ yum update -y
 
 #Installation of basic tools
 echo "Installing basic tools..."
-yum install pacemaker ccs pcs cman resource-agents wget man links nano dstat system-config-firewall ntsysv -y
+yum install pacemaker ccs pcs cman resource-agents wget man links nano dstat ntsysv -y
 
 echo "Cluster preflight..."
 	#Add node entries to hosts file

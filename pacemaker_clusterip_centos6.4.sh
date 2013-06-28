@@ -24,10 +24,8 @@ echo
 [ -z "$5" ] && echo $_Usage && echo && exit
 
 #Define variables
-echo "We will now gather required information by asking you a series of questions."
-echo ""
-
-
+#echo "We will now gather required information by asking you a series of questions."
+#echo ""
 
 echo "Cluster will be created: $1"
 echo "Node 1 hostname has been set to: $2"

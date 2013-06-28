@@ -168,6 +168,3 @@ select yn in "Yes" "No"; do
 done
 
 echo "End of script. Send feedback to bd@dargus.co.uk, thanks."
-
-# apache setup script /lib/apache_centos6.4.sh
-# drbd setup script /lib/drbd_8.4.3_src.sh
